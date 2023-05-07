@@ -68,25 +68,3 @@ figure {
 figure:hover {
   background-color: #3A3A3A;
 }
-
-[data-title]:hover::after {
-  transition: all 0.1s ease 0.5s;
-  visibility: visible;
-}
-[data-title]::after {
-  content: attr(data-title);
-  background-color: whitesmoke;
-  color: #3A3A3A;
-  font-size: 1.2rem;
-  font-family: arial,sans-serif;
-  position: absolute;
-  padding: 5px;
-  bottom: -2.8rem;
-  left: var(--posX);
-  white-space: var(--white-space);
-  visibility: hidden;
-  border-radius: 5px;
-}
-[data-title] {
-  position: relative;
-}
