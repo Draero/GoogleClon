@@ -1,53 +1,20 @@
+import { addPopUp, getPopUpHeight } from "./components/pop-up/pop-up.js"
+
 class generalViewController {
   constructor () {
-    // primary attributes
-    // related to attribute alt for img 
-    this.popUpObject = {
-      app_logo: {
-        account: "Cuenta de Google",
-        username: "Edwin Galeano",
-        email: "ed.galeano1@gmail.com",
-      },
-      profile_image: "Google Apps",
-    };
     // obtain html element
     this.elementsWithPopUp = document.querySelectorAll(".pop-up-container");
     this.elementsWithPopUp.forEach((el, index) => {
-      for (const e in this.popUpObject) {
-        const imgNode = this.getImageChildNode(el.childNodes);
-        const ulNode = this.getUlChildNode(el.childNodes);
-        if (imgNode.alt === e) {
-          if (typeof this.popUpObject[e] === 'string') {
-            const newLi = document.createElement('li');
-            newLi.textContent = this.popUpObject[e];
-            ulNode.appendChild(newLi);
-          }
-          else {
-            const keys = Object.keys(this.popUpObject[e]).length;
-            for (let i=0; i<keys; i++) {
-              const newLi = document.createElement('li');
-              let text = "";
-              if (i === 0) {
-                text = document.createElement('b');
-                text.textContent = this.popUpObject[e]["account"];
-              }
-              else if (i === 1) newLi.textContent = this.popUpObject[e]["username"]; 
-              else newLi.textContent = this.popUpObject[e]["email"];
-              if (i !== 0) ulNode.appendChild(newLi);
-              else ulNode.appendChild(text);
-            }
-          }
-        }
-      };
+      const posY = 15;
+      // add ul
+      el.appendChild(addPopUp(el));
+      // position ul in Y
+      const popUpHeight = getPopUpHeight(this.getUlChildNode(el.childNodes));
+      el.style.setProperty('--posY', `${-(posY + popUpHeight)}px`)
+      // listeners
+      el.addEventListener('mouseleave', this.outOfPopUpContainer);
+      el.addEventListener('mouseenter', this.intoPopUpContainer);
     });
-  }
-
-  getImageChildNode (nList) {
-    let childNod = {};
-    nList.forEach(el => {
-      if (el.nodeName === "IMG") childNod = el;
-    });
-    return childNod;
   }
 
   getUlChildNode (nList) {
@@ -56,6 +23,24 @@ class generalViewController {
       if (el.nodeName === "UL") childNod = el;
     });
     return childNod;
+  }
+
+  intoPopUpContainer (popUpContainer) {
+    console.log("El cursor se ha movido sobre el elemento");
+    let popUp = {};
+    popUpContainer.currentTarget.childNodes.forEach(el => {
+      if (el.nodeName === "UL") popUp = el;
+    });;
+    popUp.classList.add("transitionToVisible");
+  }
+
+  outOfPopUpContainer (popUpContainer) {
+    console.log("El cursor se ha movido fuera del elemento");
+    let popUp = {};
+    popUpContainer.currentTarget.childNodes.forEach(el => {
+      if (el.nodeName === "UL") popUp = el;
+    });;
+    popUp.classList.remove("transitionToVisible");
   }
 }
 
