@@ -80,6 +80,7 @@ figure:hover {
   padding: 5px;
   background-color: whitesmoke;
   bottom: var(--posY);
+  left: var(--posX);
   color: #3A3A3A;
   font-size: 1.2rem;
   font-family: arial,sans-serif;

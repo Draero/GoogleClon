@@ -1,47 +1,34 @@
-import { addPopUp, getPopUpHeight } from "./components/pop-up/pop-up.js"
+import popUp from "./components/pop-up/pop-up.js"
+import getChildNode from "./components/general/main-service.js"
 
 class generalViewController {
   constructor () {
     // obtain html element
     this.elementsWithPopUp = document.querySelectorAll(".pop-up-container");
-    this.elementsWithPopUp.forEach((el, index) => {
-      const posY = 15;
+    this.elementsWithPopUp.forEach((el) => {
       // add ul
-      el.appendChild(addPopUp(el));
+      el.appendChild(popUp.addPopUp(el));
+      // get childNode
+      const childUl = getChildNode(el.childNodes, "UL");
       // position ul in Y
-      const popUpHeight = getPopUpHeight(this.getUlChildNode(el.childNodes));
-      el.style.setProperty('--posY', `${-(posY + popUpHeight)}px`)
+      el.style.setProperty('--posY', `${popUp.getPopUpPosY(childUl)}px`);
+      // position ul in X respect parent element
+      el.style.setProperty('--posX', `${popUp.getPopUpPosX(el, childUl)}px`);
       // listeners
       el.addEventListener('mouseleave', this.outOfPopUpContainer);
       el.addEventListener('mouseenter', this.intoPopUpContainer);
     });
   }
 
-  getUlChildNode (nList) {
-    let childNod = {};
-    nList.forEach(el => {
-      if (el.nodeName === "UL") childNod = el;
-    });
-    return childNod;
-  }
-
   intoPopUpContainer (popUpContainer) {
-    console.log("El cursor se ha movido sobre el elemento");
-    let popUp = {};
-    popUpContainer.currentTarget.childNodes.forEach(el => {
-      if (el.nodeName === "UL") popUp = el;
-    });;
+    const popUp = getChildNode(popUpContainer.currentTarget.childNodes, "UL");
     popUp.classList.add("transitionToVisible");
   }
 
   outOfPopUpContainer (popUpContainer) {
-    console.log("El cursor se ha movido fuera del elemento");
-    let popUp = {};
-    popUpContainer.currentTarget.childNodes.forEach(el => {
-      if (el.nodeName === "UL") popUp = el;
-    });;
+    const popUp = getChildNode(popUpContainer.currentTarget.childNodes, "UL");
     popUp.classList.remove("transitionToVisible");
   }
 }
 
-const gV = new generalViewController();
+export default new generalViewController();
