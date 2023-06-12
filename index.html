@@ -5,34 +5,77 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Google</title>
-    <link rel="stylesheet" href="./style.css">
+    <link rel="stylesheet" href="./style.css" />
   </head>
   <body>
     <header>
       <ul>
-        <li class="enum1"><a href="#" class="header-li1 setList">Gmail</a></li>
-        <li class="enum2"><a href="#" class="header-li2 setList">Imágenes</a></li>
-        <li class="enum3">
+        <li><a href="#" class="header-li1 setList">Gmail</a></li>
+        <li>
+          <a href="#" class="header-li2 setList">Imágenes</a>
+        </li>
+        <li>
           <a href="#" class="header-li3 setList">
-            <figure class="provisionalClass">
-              <img src="./imgs/Apps.svg" alt="Logo App" />
+            <figure class="header-icon pop-up-container">
+              <img src="./imgs/Apps.svg" alt="app_logo" />
             </figure>
           </a>
         </li>
-        <li class="enum4">
-          <a
-            href="#"
-            class="header-li4 setList"
-          >
-          <figure class="provisionalClass">
-            <img src="./imgs/unnamed.jpg" alt="">
-          </figure>
+        <li>
+          <a href="#" class="header-li4 setList">
+            <figure class="header-icon pop-up-container">
+              <img src="./imgs/unnamed.jpg" alt="profile_image" />
+            </figure>
           </a>
         </li>
       </ul>
     </header>
-    <main></main>
-    <footer></footer>
-    <script src="./view.js"></script>
+    <main>
+      <div class="main-div_imgContainer">
+        <figure >
+          <img src="./imgs/google.png" alt="google_logo">
+        </figure>
+      </div>
+      <form action="">
+        <div class="main-div_inputContainer">
+          <div>
+            <figure class="search-magni">
+              <img src="./imgs/search.svg" alt="search_icon">
+            </figure>
+            <input type="text">
+            <figure class="search-icon pop-up-container">
+              <img src="./imgs/Mic.svg" alt="mic_icon">
+            </figure>
+            <figure class="search-icon pop-up-container">
+              <img src="./imgs/Camera.svg" alt="camera_icon">
+            </figure>
+          </div>
+        </div>
+        <div class="main-div_buttons">
+          <input type="submit" value="Buscar con Google">
+          <input type="submit" value="Voy a tener suerte">
+        </div>
+      </form>
+    </main>
+    <footer>
+      <div class="footer-country">
+        <p>Colombia</p>
+      </div>
+      <hr>
+      <div class="footer-about">
+        <ul class="footer-about_first">
+          <li><a href="#">Sobre Google</a></li>
+          <li><a href="#">Publicidad</a></li>
+          <li><a href="#">Negocios</a></li>
+          <li><a href="#">Cómo funciona la Búsqueda</a></li>
+        </ul>
+        <ul class="footer-about_second">
+          <li><a href="#">Privacidad</a></li>
+          <li><a href="#">Condiciones</a></li>
+          <li><a href="#">Preferencias</a></li>
+        </ul>
+      </div>
+    </footer>
+    <script type="module" src="./view.js"></script>
   </body>
 </html>
